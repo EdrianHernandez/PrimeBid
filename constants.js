@@ -1,6 +1,6 @@
-import { AuctionItem, Category } from './types';
+const NOW = Date.now();
 
-export const CATEGORIES: Category[] = [
+export const CATEGORIES = [
   'All',
   'Art',
   'Electronics',
@@ -10,9 +10,7 @@ export const CATEGORIES: Category[] = [
   'Vehicles'
 ];
 
-const NOW = Date.now();
-
-export const INITIAL_ITEMS: AuctionItem[] = [
+export const INITIAL_ITEMS = [
   {
     id: '1',
     title: 'Vintage Rolex Submariner',
