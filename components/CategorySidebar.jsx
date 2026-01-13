@@ -1,15 +1,9 @@
 import React from 'react';
-import { Category } from '../types';
 import { CATEGORIES } from '../constants';
 import { LayoutGrid, Palette, Smartphone, Watch, Armchair, Trophy, Car } from 'lucide-react';
 
-interface CategorySidebarProps {
-  selectedCategory: Category;
-  onSelectCategory: (category: Category) => void;
-}
-
-const CategorySidebar: React.FC<CategorySidebarProps> = ({ selectedCategory, onSelectCategory }) => {
-  const getIcon = (cat: Category) => {
+const CategorySidebar = ({ selectedCategory, onSelectCategory }) => {
+  const getIcon = (cat) => {
     switch (cat) {
       case 'All': return <LayoutGrid className="w-4 h-4" />;
       case 'Art': return <Palette className="w-4 h-4" />;
