@@ -4,14 +4,13 @@ import ActiveBidsGrid from './components/ActiveBidsGrid';
 import BiddingHistory from './components/BiddingHistory';
 import CategorySidebar from './components/CategorySidebar';
 import { INITIAL_ITEMS } from './constants';
-import { AuctionItem, BidHistoryItem, Category } from './types';
 
-const App: React.FC = () => {
-  const [items, setItems] = useState<AuctionItem[]>(INITIAL_ITEMS);
-  const [userBalance, setUserBalance] = useState<number>(250000);
+const App = () => {
+  const [items, setItems] = useState(INITIAL_ITEMS);
+  const [userBalance, setUserBalance] = useState(250000);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<Category>('All');
-  const [history, setHistory] = useState<BidHistoryItem[]>([
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [history, setHistory] = useState([
      {
         id: 'init-1',
         itemId: '1',
@@ -30,7 +29,7 @@ const App: React.FC = () => {
      }
   ]);
 
-  const handlePlaceBid = useCallback((itemId: string, amount: number) => {
+  const handlePlaceBid = useCallback((itemId, amount) => {
     // 1. Validation
     if (amount > userBalance) {
         alert("Insufficient funds!");
@@ -49,17 +48,13 @@ const App: React.FC = () => {
         return item;
     }));
 
-    // 3. Update User Balance (Assume escrow style - holding funds)
-    // In a real app, this logic is more complex.
-    // Here we just don't deduct immediately to keep the UX simple for "Balance" display,
-    // or we could deduct. Let's deduct to show interactivity.
-    // Actually, usually balance is "Buying Power". Let's leave it static for demo or strictly illustrative.
-    // Let's NOT deduct for this demo to allow infinite fun, or maybe just show a toast.
+    // 3. Update User Balance
+    // Logic preserved: static balance for demo as per original comments.
     
     // 4. Update History
     const targetItem = items.find(i => i.id === itemId);
     if (targetItem) {
-        const newHistoryItem: BidHistoryItem = {
+        const newHistoryItem = {
             id: Date.now().toString(),
             itemId: itemId,
             itemTitle: targetItem.title,
@@ -107,7 +102,6 @@ const App: React.FC = () => {
                             {filteredItems.length} {filteredItems.length === 1 ? 'item' : 'items'} found in {selectedCategory}
                         </p>
                     </div>
-                    {/* Sort Dropdown could go here */}
                     <div className="hidden sm:block">
                         <select className="form-select bg-white border border-slate-300 text-slate-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
                             <option>Ending Soonest</option>
@@ -124,12 +118,12 @@ const App: React.FC = () => {
                 />
             </div>
 
-            {/* Right Sidebar - History (Hidden on mobile/tablet, shown on large screens) */}
+            {/* Right Sidebar - History */}
             <div className="hidden xl:block">
                 <BiddingHistory history={history} />
             </div>
 
-            {/* Mobile History Section (Below grid on small screens) */}
+            {/* Mobile History Section */}
             <div className="xl:hidden w-full mt-8">
                 <h3 className="text-xl font-bold text-slate-900 mb-4">Recent Activity</h3>
                 <BiddingHistory history={history} />
