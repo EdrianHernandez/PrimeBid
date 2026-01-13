@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { AuctionItem } from '../types';
 import { Clock, TrendingUp, Flame } from 'lucide-react';
 
-interface ActiveBidsGridProps {
-  items: AuctionItem[];
-  onPlaceBid: (itemId: string, amount: number) => void;
-}
-
-const CountdownTimer: React.FC<{ endTime: number }> = ({ endTime }) => {
+const CountdownTimer = ({ endTime }) => {
   const [timeLeft, setTimeLeft] = useState(endTime - Date.now());
 
   useEffect(() => {
@@ -37,7 +31,7 @@ const CountdownTimer: React.FC<{ endTime: number }> = ({ endTime }) => {
   );
 };
 
-const BidCard: React.FC<{ item: AuctionItem; onPlaceBid: (id: string, amount: number) => void }> = ({ item, onPlaceBid }) => {
+const BidCard = ({ item, onPlaceBid }) => {
   const [isBidding, setIsBidding] = useState(false);
 
   const minBid = item.currentBid + (item.currentBid < 1000 ? 50 : 100);
@@ -126,7 +120,7 @@ const BidCard: React.FC<{ item: AuctionItem; onPlaceBid: (id: string, amount: nu
   );
 };
 
-const ActiveBidsGrid: React.FC<ActiveBidsGridProps> = ({ items, onPlaceBid }) => {
+const ActiveBidsGrid = ({ items, onPlaceBid }) => {
   if (items.length === 0) {
     return (
         <div className="flex-1 flex flex-col items-center justify-center p-12 text-center bg-white rounded-xl border border-dashed border-slate-300">
