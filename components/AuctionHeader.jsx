@@ -1,13 +1,7 @@
 import React from 'react';
 import { Search, Bell, User, Gavel } from 'lucide-react';
 
-interface AuctionHeaderProps {
-  userBalance: number;
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
-}
-
-const AuctionHeader: React.FC<AuctionHeaderProps> = ({ userBalance, searchQuery, setSearchQuery }) => {
+const AuctionHeader = ({ userBalance, searchQuery, setSearchQuery }) => {
   return (
     <header className="auction-header sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
