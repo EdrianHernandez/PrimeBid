@@ -1,13 +1,8 @@
 import React from 'react';
-import { BidHistoryItem } from '../types';
 import { History, TrendingUp } from 'lucide-react';
 
-interface BiddingHistoryProps {
-  history: BidHistoryItem[];
-}
-
-const BiddingHistory: React.FC<BiddingHistoryProps> = ({ history }) => {
-  const formatTime = (timestamp: number) => {
+const BiddingHistory = ({ history }) => {
+  const formatTime = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
